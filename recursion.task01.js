@@ -27,5 +27,4 @@ const numberBotGame = (botNumber = Math.floor((Math.random()) * 100) + 1) => {
   numberBotGame(botNumber);
 };
 
-
 numberBotGame();
