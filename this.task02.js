@@ -2,7 +2,6 @@
 
 const cart = {
   items: [],
-  totalPrice: 0,
   count: 0,
   discount: 0,
 
@@ -15,7 +14,6 @@ const cart = {
 
     this.items.push(userItemArr);
     this.increaseCount(amount);
-    this.calculateItemPrice();
   },
 
   increaseCount(amount) {
@@ -25,24 +23,26 @@ const cart = {
   calculateItemPrice() {
     const total = this.items.reduce((acc, item) =>
       acc + (item.itemPrice * item.itemAmount), 0);
-    this.totalPrice = total - (total * (this.discount / 100));
+    const finalDiscountPrice = total - (total * (this.discount / 100));
+    return finalDiscountPrice;
   },
 
-  set setDiscount(promocode) {
+  set applyPromocode(promocode) {
     if (promocode === 'METHED') {
       this.discount = 15;
     } else if (promocode === 'NEWYEAR') {
       this.discount = 21;
+    } else {
+      alert('Промокод не верен');
     }
   },
 
-  get finalPrice() {
-    return this.totalPrice;
+  get totalPrice() {
+    return this.calculateItemPrice();
   },
 
   clear() {
     this.items = [];
-    this.totalPrice = 0;
     this.count = 0;
     this.discount = 0;
   },
@@ -54,7 +54,7 @@ const cart = {
   },
 };
 
-cart.setDiscount = 'METHED';
+cart.applyPromocode = 'METHED';
 
 cart.add('Будильник', 1700, 2);
 cart.add('Ночник', 228, 1);

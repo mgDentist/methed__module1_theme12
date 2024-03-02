@@ -17,7 +17,8 @@ const numberBotGame = (botNumber = Math.floor((Math.random()) * 100) + 1) => {
   }
 
   if (botNumber === userAnswer) {
-    alert('Правильно');
+    alert('Правильно! Игра закончена');
+    return;
   } else if (userAnswer < botNumber) {
     alert('Больше');
   } else if (userAnswer > botNumber) {
